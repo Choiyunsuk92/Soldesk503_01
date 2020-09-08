@@ -59,10 +59,11 @@ public class LibraryBoardService {
 				location = "thymeleaf/lib_Board/lib_board_write";
 				e.printStackTrace();
 			}
-			libraryBoardDTO.setOriginalFileName(originalTotal);
-			libraryBoardDTO.setStoreFileName(storeTotal);
-			libraryBoardDTO.setFileSize(fileSizeTotal);
 		}
+		
+		libraryBoardDTO.setOriginalFileName(originalTotal);
+		libraryBoardDTO.setStoreFileName(storeTotal);
+		libraryBoardDTO.setFileSize(fileSizeTotal);
 		libraryBoardMapper.libraryInsert(libraryBoardDTO);
 		location = "redirect:/libraryBoard/library";
 		return location;
