@@ -37,7 +37,7 @@ public class LibraryController {
 	}
 	@RequestMapping(value="libBoardForm" , method = RequestMethod.POST)
 	public String libraryWritePro(@Validated LibraryBoardCommand libraryBoardCommand,
-			BindingResult result, HttpServletRequest request) {
+			BindingResult result, HttpServletRequest request) throws Exception{
 		if (result.hasErrors()) {
 			System.out.println("bsaicf");
  			 return "thymeleaf/lib_Board/lib_board_write";
