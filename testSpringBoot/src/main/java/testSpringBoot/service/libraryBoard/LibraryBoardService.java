@@ -40,7 +40,7 @@ public class LibraryBoardService {
 		String PATH = "/static/lib_Board/upload";
 		String filePath = request.getServletContext().getRealPath(PATH);
 		System.out.println("LibraryBoardService : " + filePath);
-		//../src/main/webapp/WEB-INF/view/static/lib_Board/upload
+		//../src/main/webapp/static/lib_Board/upload
 		for(MultipartFile mf : libraryBoardCommand.getReport()) {
 			String original = mf.getOriginalFilename(); // 전송된 파일명 
 			String originalFileExtension = // 전송된 파일명으로 부터 확장자만 자라옴   
