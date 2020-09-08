@@ -23,15 +23,22 @@ public class LibraryBoardListService {
 		
 		Long startRow = ((long)page -1 ) * 10 +1;
 		Long endRow = startRow + limit -1;
+			
+		/* 예전 방식 
+		 LibraryBoardDTO dto = new LibraryBoardDTO();
+		 dto.setStartEndPageDTO(new StartEndPageDTO(startRow, endRow));
+		*/
 		
-		StartEndPageDTO startEndPageDTO = 
+		StartEndPageDTO dto = 
 				new StartEndPageDTO(startRow, endRow, null, null);
 		
+		// startRow와 endRow만큼 레코드를 가져오 
 		List<LibraryBoardDTO> lists = 
-				libraryBoardMapper.getLibraryBoardList(startEndPageDTO);
+				libraryBoardMapper.getLibraryBoardList(dto);
 		// 자료실테이블에 있는 레코드가 몇개인지 가져오
 		int count = libraryBoardMapper.getLibraryCount();
-		
+	    
+		/* pagging 공통부분 */
 		model.addAttribute("count", count);
 		model.addAttribute("lists", lists);
 		PageAction pageAction = new PageAction();

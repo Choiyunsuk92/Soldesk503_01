@@ -27,4 +27,5 @@ public class LibraryBoardDTO {
 	String storeFileName;
 	String fileSize;
 	
+	//StartEndPageDTO startEndPageDTO;
 }

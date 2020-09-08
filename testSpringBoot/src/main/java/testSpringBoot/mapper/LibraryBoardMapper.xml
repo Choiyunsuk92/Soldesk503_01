@@ -41,7 +41,7 @@
 						</if>
 					</trim>
 					order by BOARD_DATE desc))
-		where rn between #{startPage} and #{endPage}
+		where rn &gt;= #{startPage} and rn &lt;= #{endPage}
 	</select>
 	<select id="getLibraryCount" resultType="int">
 		select count(*) from LIBRARYBOARD
