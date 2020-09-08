@@ -4,13 +4,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import testSpringBoot.command.LibraryBoardCommand;
+import testSpringBoot.service.libraryBoard.LibraryBoardListService;
 import testSpringBoot.service.libraryBoard.LibraryBoardService;
 
 @Controller
@@ -18,6 +21,8 @@ import testSpringBoot.service.libraryBoard.LibraryBoardService;
 public class LibraryController {
 	@Autowired
 	LibraryBoardService libraryBoardService;
+	@Autowired
+	LibraryBoardListService libraryBoardListService;
 	
 	// command객체가 필요한 곳에 model로 전달 
 	@ModelAttribute
@@ -27,7 +32,10 @@ public class LibraryController {
 	// model.addAttribute("libraryBoardCommand", new LibraryBoardCommand())
 	// @ModelAttribute("libraryBoardCommand" )LibraryBoardCommand libraryBoardCommand
 	@RequestMapping("library")
-	public String libraryList() {
+	public String libraryList(
+			@RequestParam(value = "page" , defaultValue = "1") Integer page,
+			Model model) throws Exception{
+		libraryBoardListService.libraryBoardList(model, page);
 		return "lib_Board/lib_board_list";
 	}
 	

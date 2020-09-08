@@ -26,4 +26,5 @@ public class LibraryBoardDTO {
 	String originalFileName;
 	String storeFileName;
 	String fileSize;
+	
 }
