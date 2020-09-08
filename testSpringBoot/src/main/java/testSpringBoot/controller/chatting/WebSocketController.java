@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 public class WebSocketController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	//왜 static 으로 만들었을까?
+	              // <key, value>
 	static HashMap<String, Session> userList = new HashMap<String, Session>();
 	private String storeId = null;
 	//서버 접속시
@@ -34,7 +35,8 @@ public class WebSocketController {
 			sendMsg(session,"사용중인 아이디 입니다.");
 		}else{//중복이 아닐 경우
 			logger.info("중복 아님");
-			userList.put(id, session);
+			userList.put(id, session);  // userList.put("이숭무", "1232242")
+			                            // userList.put("한재용", "97977696")
 			broadCast(id+"님이 접속 하였습니다.   현재 접속자 수 : "+userList.size());
 		}	
 	}
@@ -74,19 +76,23 @@ public class WebSocketController {
 	//메시지 전체 전송
 	private void broadCast(String text){
 		logger.info("전달 대상 : "+userList.size());
+		// Map에 있는 모든 키를 가져
 		Set<String>keys =  userList.keySet();
-		try {			
+		try {		
+			// list에 있는 모든 사용자에게 메세지를 전송하기 위해서 모든 키를 하나씩 받아 
 			for(String key : keys) {
 				logger.info("key : "+key);
-				Session session = userList.get(key);	
+				//id에 해당하는 session을 가져
+				Session session = userList.get(key);
+		        // key(ID)에 해당 세션을 가진 사용자에게 메세지 전달 
 				session.getBasicRemote().sendText(text);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
 	//한명에게 메시지 전달
+	//비밀채팅 
 	private void sendMsg(Session session, String msg) {
 		try {
 			session.getBasicRemote().sendText(msg);
