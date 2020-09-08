@@ -26,10 +26,10 @@
 		<result column="STORE_FILE_NAME" jdbcType="VARCHAR" property="storeFileName"/>
 		<result column="FILE_SIZE" jdbcType="BIGINT" property="fileSize"/>
 	</resultMap>
-	<select id="getLibraryBoardList"  resultMap="baseLibrary" >
-	   select * 
-	   from( select rownum rn, <include refid="basecolumn" />
-		     friom (select 
+	<select id="getLibraryBoardList"  resultMap="baseLibrary">
+		select rn, <include refid="basecolumn" />
+		from (select rownum rn, <include refid="basecolumn" />
+			 from ( select 
 						<include refid="basecolumn" />
 					from LIBRARYBOARD
 					<trim prefix="where" prefixOverrides="AND | OR">
