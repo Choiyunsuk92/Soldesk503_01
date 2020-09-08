@@ -42,8 +42,8 @@ public class LibraryController {
 			System.out.println("bsaicf");
  			 return "thymeleaf/lib_Board/lib_board_write";
 	    }
-		libraryBoardService.writePro(libraryBoardCommand,request);
+		String location = libraryBoardService.writePro(libraryBoardCommand,request);
 		//write페이지가 실행된 후에는 리스트 페이지로 가야 한다.
-		return "redirect:/libraryBoard/library";
+		return location;
 	}
 }
