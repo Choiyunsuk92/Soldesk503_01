@@ -14,7 +14,7 @@
 	
 	<tr>
 		<td height="16">제 목&nbsp;&nbsp;</td>
-		<td >[[${list[0].boardSubject }]]</span></td>
+		<td >[[${dto.boardSubject }]]</span></td>
 	</tr>
 	<tr bgcolor="cccccc">
 		<td colspan="2" style="height:1px;">
@@ -26,7 +26,7 @@
 			<table border=0 width=490 height=250 >
 				<tr>
 					<td valign=top>
-					<span th:utext="${#strings.replace(list[0].boardContent, T(System).getProperty('line.separator'), '&lt;br /&gt;')}"></span>
+					<span th:utext="${#strings.replace(dto.boardContent, T(System).getProperty('line.separator'), '&lt;br /&gt;')}"></span>
 					</td>
 				</tr>
 			</table>
@@ -36,7 +36,13 @@
 	<tr>
 		<td>파일</td>
 		<td>
+		<!--        FileName  :   List<FileName>  -->
 		<div th:each="file :  ${fileList}" >
+		<!-- 파일 다운로드를 하기 위한 링 -->
+		<!-- <a href= "/libraryBoard/${file.storeFileName}> 파일 다운로드 </a>" -->
+		<!-- 
+			html에서는 EL(${})을 사용할 수 없다 
+		<a href="/libraryBoard/fileDown?file=${file.storeFileName}"/> -->
 		<a th:href="@{/libraryBoard/fileDown/{file}(file=${file.storeFileName+'`'+file.originalfileName})}" >
 			[[${file.originalfileName }]]</a>
 		&nbsp;&nbsp; / &nbsp;&nbsp;[[${file.fileSize }]]Byte

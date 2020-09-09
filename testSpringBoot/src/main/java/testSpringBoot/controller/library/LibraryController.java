@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import testSpringBoot.command.LibraryBoardCommand;
+import testSpringBoot.service.libraryBoard.LibraryBoardDetailService;
 import testSpringBoot.service.libraryBoard.LibraryBoardListService;
 import testSpringBoot.service.libraryBoard.LibraryBoardService;
 
@@ -60,7 +61,7 @@ public class LibraryController {
 	}
 	@RequestMapping("libBoardDetail/{id}")
 	public String libBoardDetail(@PathVariable(value = "id") String boardNum,
-			Model model, HttpSession session) {
+			Model model, HttpSession session)  throws Exception{
 		libraryBoardDetailService.libBoardDetail(boardNum, session, model);
 		return "thymeleaf/lib_Board/lib_board_view";
 	}
