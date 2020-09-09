@@ -19,6 +19,7 @@ import testSpringBoot.command.LibraryBoardCommand;
 import testSpringBoot.controller.FileDownLoad;
 import testSpringBoot.domain.FileName;
 import testSpringBoot.service.libraryBoard.FileDelService;
+import testSpringBoot.service.libraryBoard.LibBoardModifyService;
 import testSpringBoot.service.libraryBoard.LibraryBoardDetailService;
 import testSpringBoot.service.libraryBoard.LibraryBoardListService;
 import testSpringBoot.service.libraryBoard.LibraryBoardService;
@@ -90,5 +91,27 @@ public class LibraryController {
 		fileDelService.fileSessionAdd(fileName, session, model);
 		return "thymeleaf/lib_Board/delPage";
 	}
+	@Autowired
+	LibBoardModifyService libBoardModifyService;
+	@RequestMapping(value = "libBoardModifyPro", method=RequestMethod.POST)
+	public String libBoardModifyPro(LibraryBoardCommand libraryBoardCommand,
+			HttpSession session,Model model) throws Exception{
+		String path = libBoardModifyService.libBoardModify(libraryBoardCommand,
+				session,model );
+		return path;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }

@@ -18,6 +18,7 @@ public class FileDelService {
 		if(list == null) {
 			list = new ArrayList<FileName>();
 		}
+		// delPage에 moidel로 0 이나 1값을 전달하기 윈한 변수 
 		int num = 0;
 		// session이 존재하지 않으면 true, session이 존재하면 false
 		Boolean newFile = true;
@@ -31,9 +32,11 @@ public class FileDelService {
 			}
 		}
 		if(newFile) {
+			// list나 session에 없으면 리스트에 추가 
 			list.add(fileName);
 			num = 1;
 		}
+		// delPage에 num가 가지고 있는 값을   val로 전달 
 		model.addAttribute("val", num);
 		session.setAttribute("fileList", list);
 	}
