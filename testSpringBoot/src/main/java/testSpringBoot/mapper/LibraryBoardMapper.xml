@@ -12,6 +12,24 @@
 		#{boardSubject},#{boardContent},sysdate,#{ipAddr},
 		0,#{originalFileName},#{storeFileName},#{fileSize})
 	</insert>
+	<update id="libraryUpdate" parameterType="testSpringBoot.domain.LibraryBoardDTO" >
+	update libraryboard
+	<trim prefix="set" suffixOverrides=",">
+		<if test="boardSubject != null">
+			board_Subject = #{boardSubject},
+		</if>
+		<if test="boardContent != null">
+			board_Content = #{boardContent},
+		</if>
+		<if test="boardContent == null">
+			board_Content = null,
+		</if>
+		original_File_Name = #{originalFileName},
+		store_File_Name = #{storeFileName},
+		file_size = #{fileSize}
+	</trim>
+	where board_num = #{boardNum}
+	</update>
 	<resultMap type="testSpringBoot.domain.LibraryBoardDTO" id="baseLibrary">
 		<id column="BOARD_NUM" jdbcType="BIGINT" property="boardNum"/>
 		<id column="USER_ID" jdbcType="VARCHAR" property="userId"/>

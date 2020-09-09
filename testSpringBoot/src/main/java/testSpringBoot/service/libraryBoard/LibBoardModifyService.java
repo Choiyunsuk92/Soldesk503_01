@@ -87,7 +87,26 @@ public class LibBoardModifyService {
 		dto.setStoreFileName(
 				storeTotal+lib.getStoreFileName());
 		dto.setFileSize(fileSizeTotal+lib.getFileSize());
-		return null;
+		// 수정을 하기 위해서는  commend 에 있는 비밀번호와 디비에 저장된 비밀번호가 같아야 한다.
+		if(passwordEncoder.matches(libraryBoardCommand.getBoardPass(), 
+				lib.getBoardPass())) {
+			// 같으면 update  를 한다 .
+			libraryBoardMapper.libraryUpdate(dto);
+			// 그리고 session에 있는  파일 정보를 삭제 하자.
+			if(list != null) {
+				for(FileName fi : list ) {
+					file = new File(filePath + "/" 
+									+ fi.getStoreFileName().replace("`", ""));
+					if(file.exists()) file.delete();
+				}
+				// session 삭제 
+				session.removeAttribute("fileList");
+			}
+			// 디테일 페이지로 이동 
+			return "redirect:/libraryBoard/libBoardDetail/"+lib.getBoardNum();
+		}
+		// 비밀번호가 일치하지 않으면 수정 페이지로 이동 
+		return "thymeleaf/lib_Board/lib_board_modify";
 	}
 }
 

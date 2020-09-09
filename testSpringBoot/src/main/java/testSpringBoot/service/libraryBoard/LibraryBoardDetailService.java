@@ -31,6 +31,7 @@ public class LibraryBoardDetailService {
 		List<FileName> fileList = new ArrayList<FileName>();
 		int i = 0;
 		for(String file : oriFile ) {
+			System.out.print(file);
 			FileName fileName = new FileName(file, strFile[i],fileSize[i] );
 			fileList.add(fileName);
 			i++;

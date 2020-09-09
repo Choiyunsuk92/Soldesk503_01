@@ -3,6 +3,7 @@ package testSpringBoot.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +19,10 @@ public class FileDownLoad {
 	public void fileDownLoad(String path, String fileName, HttpServletRequest request, HttpServletResponse response) {
 		String RealPath = request.getServletContext().getRealPath(path);
 		String originalFileName = fileName.split("`")[1];
+		try {
+			originalFileName = URLEncoder.encode(originalFileName,"UTF-8");
+		}catch(Exception e) {}
 		String storeFileName = fileName.split("`")[0];
-		System.out.print(originalFileName);
-		response.setCharacterEncoding("utf-8");
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + originalFileName + "\";");
         response.setHeader("Content-Transfer-Encoding", "binary");
@@ -49,3 +51,5 @@ public class FileDownLoad {
 		}
 	}
 }
+
+	
