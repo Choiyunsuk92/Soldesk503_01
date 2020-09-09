@@ -1,6 +1,7 @@
 package testSpringBoot.controller.library;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import testSpringBoot.command.LibraryBoardCommand;
+import testSpringBoot.controller.FileDownLoad;
 import testSpringBoot.service.libraryBoard.LibraryBoardDetailService;
 import testSpringBoot.service.libraryBoard.LibraryBoardListService;
 import testSpringBoot.service.libraryBoard.LibraryBoardService;
@@ -65,8 +67,14 @@ public class LibraryController {
 		libraryBoardDetailService.libBoardDetail(boardNum, session, model);
 		return "thymeleaf/lib_Board/lib_board_view";
 	}
-	
-	
+	@Autowired
+	FileDownLoad fileDownLoad;
+	@RequestMapping("fileDown")
+	public void filDownLoad(@RequestParam(value="file")String fileName,
+			HttpServletResponse response, HttpServletRequest request) throws Exception{
+		String path = "/static/lib_Board/upload";
+		fileDownLoad.fileDownLoad(path,fileName,request,response);
+	}
 	
 	
 	

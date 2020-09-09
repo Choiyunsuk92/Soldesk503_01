@@ -32,15 +32,27 @@
 			</table>
 		</td>
 	</tr>
+	<!--  https://m.blog.naver.com/PostView.nhn?blogId=specialnks&logNo=221313625420&proxyReferer=https:%2F%2Fwww.google.com%2F -->
 	<tr>
 		<td>파일</td>
 		<td>
-
+		<!--        FileName  :   List<FileName>  -->
 		<div th:each="file :  ${fileList}" >
-
-		<a th:href="@{/libraryBoard/fileDown/{file}(file=${file.storeFileName+'`'+file.originalfileName})}" >
+		<!-- 파일 다운로드를 하기 위한 링 -->
+		<!-- <a href= "/libraryBoard/${file.storeFileName}> 파일 다운로드 </a>" -->
+		<!-- 
+			html에서는 EL(${})을 사용할 수 없다 -->
+		<!-- pathValiable
+		<a href="/libraryBoard/fileDown/${file.storeFileName}"/> -->
+		<!-- <a th:href="@{/libraryBoard/fileDown/{file}(file=${file.storeFileName+'`'+file.originalfileName})}" >
+			[[${file.originalfileName }]]</a> -->
+			
+		<!-- 쿼리스트링 방식 -->
+		<a href="/libraryBoard/fileDown?file=${file.storeFileName}"/>
+		<a th:href="@{/libraryBoard/fileDown(file=${file.storeFileName+'`'+file.originalfileName})}" >
 			[[${file.originalfileName }]]</a>
 		&nbsp;&nbsp; / &nbsp;&nbsp;[[${file.fileSize }]]Byte
+		
 		</div>
 		</td>	
 			
