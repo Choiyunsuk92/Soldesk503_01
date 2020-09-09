@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import testSpringBoot.command.LibraryBoardCommand;
 import testSpringBoot.controller.FileDownLoad;
 import testSpringBoot.domain.FileName;
+import testSpringBoot.service.libraryBoard.FileDelService;
 import testSpringBoot.service.libraryBoard.LibraryBoardDetailService;
 import testSpringBoot.service.libraryBoard.LibraryBoardListService;
 import testSpringBoot.service.libraryBoard.LibraryBoardService;
@@ -82,9 +83,11 @@ public class LibraryController {
 		libraryBoardDetailService.libBoardDetail(boardNum, session, model);
 		return "thymeleaf/lib_Board/lib_board_modify";
 	}
+	@Autowired
+	FileDelService fileDelService; 
 	@RequestMapping("fileDel")
 	public String fileDel(FileName fileName,HttpSession session,Model model) {
-		
+		fileDelService.fileSessionAdd(fileName, session, model);
 		return "thymeleaf/lib_Board/delPage";
 	}
 	
