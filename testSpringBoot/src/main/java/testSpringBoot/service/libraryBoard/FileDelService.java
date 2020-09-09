@@ -24,6 +24,7 @@ public class FileDelService {
 		for(int i = 0; i < list.size(); i++) {
 			FileName fn = list.get(i);
 			if(fn.getStoreFileName().equals(fileName.getStoreFileName())) {
+				// 삭제 취소 버튼을 누르면 list에 있는 값 삭제 
 				list.remove(i);
 				newFile = false;
 				num = 0;
