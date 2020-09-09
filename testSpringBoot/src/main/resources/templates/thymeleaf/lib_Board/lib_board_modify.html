@@ -17,7 +17,7 @@ function fileDel(strFile, orgFile, fileSize, btn ){
 		type : "get",	
 		url : "fileDel",
 		dataType : "text",
-		data: {"originalFileName":orgFile,"storeFileName":strFile,
+		data: {"originalfileName":orgFile,"storeFileName":strFile,
 			"fileSize" : fileSize},
 		success : function(result){
 			alert("#"+btn.id)
