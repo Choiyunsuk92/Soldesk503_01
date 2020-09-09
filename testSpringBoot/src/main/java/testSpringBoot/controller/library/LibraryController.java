@@ -1,6 +1,7 @@
 package testSpringBoot.controller.library;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +25,8 @@ public class LibraryController {
 	LibraryBoardService libraryBoardService;
 	@Autowired
 	LibraryBoardListService libraryBoardListService;
+	@Autowired
+	LibraryBoardDetailService libraryBoardDetailService;
 	
 	// command객체가 필요한 곳에 model로 전달 
 	@ModelAttribute
@@ -54,4 +58,16 @@ public class LibraryController {
 		//write페이지가 실행된 후에는 리스트 페이지로 가야 한다.
 		return location;
 	}
+	@RequestMapping("libBoardDetail/{id}")
+	public String libBoardDetail(@PathVariable(value = "id") String boardNum,
+			Model model, HttpSession session) {
+		libraryBoardDetailService.libBoardDetail(boardNum, session, model);
+		return "thymeleaf/lib_Board/lib_board_view";
+	}
+	
+	
+	
+	
+	
+	
 }
