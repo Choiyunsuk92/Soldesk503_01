@@ -21,6 +21,8 @@ public class LibraryBoardDetailService {
 	LibraryBoardMapper libraryBoardMapper;
 	public void libBoardDetail(String boardNum,HttpSession session,Model model) 
 			throws Exception{
+		libraryBoardMapper.updateReadCount(boardNum);
+		
 		StartEndPageDTO startEndPageDTO = 
 				new StartEndPageDTO(1L,1L, null,boardNum );
 		LibraryBoardDTO dto = 

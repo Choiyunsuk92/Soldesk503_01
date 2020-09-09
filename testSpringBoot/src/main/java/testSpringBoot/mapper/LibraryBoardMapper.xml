@@ -12,6 +12,13 @@
 		#{boardSubject},#{boardContent},sysdate,#{ipAddr},
 		0,#{originalFileName},#{storeFileName},#{fileSize})
 	</insert>
+	
+	<update id="updateReadCount" parameterType = 'string'>
+		update LIBRARYBOARD
+		set READ_COUNT = READ_COUNT + 1
+		where board_num = #{boardNum}
+	</update>
+	
 	<update id="libraryUpdate" parameterType="testSpringBoot.domain.LibraryBoardDTO" >
 	update libraryboard
 	<trim prefix="set" suffixOverrides=",">
