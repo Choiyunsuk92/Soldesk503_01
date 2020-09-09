@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import testSpringBoot.command.LibraryBoardCommand;
 import testSpringBoot.controller.FileDownLoad;
+import testSpringBoot.domain.FileName;
 import testSpringBoot.service.libraryBoard.LibraryBoardDetailService;
 import testSpringBoot.service.libraryBoard.LibraryBoardListService;
 import testSpringBoot.service.libraryBoard.LibraryBoardService;
@@ -75,8 +76,16 @@ public class LibraryController {
 		String path = "/static/lib_Board/upload";
 		fileDownLoad.fileDownLoad(path,fileName,request,response);
 	}
-	
-	
-	
+	@RequestMapping("libBoardModify")
+	public String libBoardModify(Model model, HttpSession session,
+			@RequestParam(value = "boardNum" ) String boardNum) throws Exception{
+		libraryBoardDetailService.libBoardDetail(boardNum, session, model);
+		return "thymeleaf/lib_Board/lib_board_modify";
+	}
+	@RequestMapping("fileDel")
+	public String fileDel(FileName fileName,HttpSession session,Model model) {
+		
+		return "thymeleaf/lib_Board/delPage";
+	}
 	
 }
