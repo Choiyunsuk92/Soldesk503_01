@@ -26,12 +26,16 @@ public class SurveyInsertService {
 		//question 저장되고 나서 questionNum를 받아오기 위해 쿼리문 실행 
 		int questionNum = surveyMapper.questionNum(userId);
 		String options [] = surveyCommend.getOptions().split("`");
-		for(String optionName : options) {
-			OptionsDTO odto = new OptionsDTO();
-			odto.setQuestionNum(questionNum);
-			odto.setOptionName(optionName);
-			odto.setUserId(userId);
+		int optionsNum = 1;
+		if(options != null) {
+			for(String optionName : options) {
+				OptionsDTO odto = new OptionsDTO();
+				odto.setQuestionNum(questionNum);
+				odto.setOptionName(optionName);
+				odto.setOptionNum(optionsNum++);
+				odto.setUserId(userId);
+				surveyMapper.optionInsert(odto);
+			}
 		}
-		
 	}
 }

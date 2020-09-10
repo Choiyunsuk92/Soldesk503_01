@@ -16,4 +16,8 @@
 	select max(question_num) from question
 	where user_id = #{userId}
 </select>
+<insert id = "optionInsert" parameterType="testSpringBoot.domain.OptionsDTO">
+	insert into OPTIONS (user_id,QUESTION_NUM,OPTIONS_NUM , OPTIONS_NAME)
+	values(#{userId}, #{questionNum}, #{optionNum}, #{optionName} )  
+</insert>
 </mapper>
