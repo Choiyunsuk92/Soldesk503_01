@@ -100,7 +100,23 @@ public class LibraryController {
 				session,model );
 		return path;
 	}
+	@RequestMapping("libBoardDel")
+	public String libBoardDel(@RequestParam(value = "boardNum" ) String boardNum ,
+			Model model) {
+		model.addAttribute("boardNum", boardNum);
+		return "thymeleaf/lib_Board/lib_board_delete";
+	}
 	
+	@Autowired
+	LibBoardDeleteService libBoardDeleteService;
+	@RequestMapping("libBoardDelPro")
+	public String libBoardDelPro(@RequestParam(value = "boardNum" ) String boardNum ,
+			@RequestParam(value = "boardPass" ) String boardPass,
+			HttpSession session, Model model) throws Exception{
+		/// 자료실 삭제와 비밀번호가 일치하는지 확인 
+		String path = libBoardDeleteService.execute(boardNum,boardPass,session,model);
+		return path;
+	}
 	
 	
 	
