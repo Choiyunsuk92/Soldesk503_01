@@ -16,5 +16,5 @@ public interface SurveyMapper {
 	public Integer questionNum(String userId)throws Exception;
 	public void optionInsert(OptionsDTO odto)throws Exception;
 	public int questionCount() throws Exception;
-	public QuestionOptionDTO surveySelectAll() throws Exception;
+	public QuestionOptionDTO surveySelectAll(int i) throws Exception;
 }

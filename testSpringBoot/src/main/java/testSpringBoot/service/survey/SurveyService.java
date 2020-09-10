@@ -22,7 +22,8 @@ public class SurveyService {
 		// 질문의 갯수가 몇개인지 확인 
 		int questionCount = surveyMapper.questionCount();
 		for(int i = 1; i <= questionCount ; i++) {
-			QuestionOptionDTO dto = surveyMapper.surveySelectAll();
+			QuestionOptionDTO dto = surveyMapper.surveySelectAll(i);
+			System.out.println(dto.getQuestion().getQuestionTitle());
 			lists.add(dto); // 질문을 가진 list
 		}
 		model.addAttribute("list", lists);

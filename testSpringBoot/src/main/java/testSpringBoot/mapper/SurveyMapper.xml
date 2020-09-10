@@ -36,10 +36,11 @@
 		<result column=  "OPTION_NAME" jdbcType="VARCHAR" property = "optionName" />
 	</collection>
 </resultMap>
-<select id = "surveySelectAll" resultMap = "questionOptionsMap">
+<select id = "surveySelectAll" resultMap = "questionOptionsMap" parameterType='int'>
 	select q.user_id, q.QUESTION_NUM, question_title, OPTION_NUM, OPTION_NAME
 	from  question q, options o
-	where q.QUESTION_NUM = o.QUESTION_NUM(+) and q.user_id = '1111'
+	where q.QUESTION_NUM = o.QUESTION_NUM(+) and q.user_id = '1111'	
+	and q.QUESTION_NUM = #{i}
 </select>
 </mapper>
 
