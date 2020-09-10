@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import testSpringBoot.domain.FileName;
+import testSpringBoot.FileName;
 import testSpringBoot.domain.LibraryBoardDTO;
 import testSpringBoot.domain.StartEndPageDTO;
 import testSpringBoot.mapper.LibraryBoardMapper;

@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import testSpringBoot.FileName;
 import testSpringBoot.command.LibraryBoardCommand;
 import testSpringBoot.controller.FileDownLoad;
-import testSpringBoot.domain.FileName;
 import testSpringBoot.service.libraryBoard.FileDelService;
 import testSpringBoot.service.libraryBoard.LibBoardModifyService;
 import testSpringBoot.service.libraryBoard.LibraryBoardDetailService;

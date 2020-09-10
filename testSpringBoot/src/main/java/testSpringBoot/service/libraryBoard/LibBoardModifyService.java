@@ -14,9 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import testSpringBoot.FileName;
 import testSpringBoot.command.AuthInfo;
 import testSpringBoot.command.LibraryBoardCommand;
-import testSpringBoot.domain.FileName;
 import testSpringBoot.domain.LibraryBoardDTO;
 import testSpringBoot.domain.StartEndPageDTO;
 import testSpringBoot.mapper.LibraryBoardMapper;
@@ -77,7 +77,7 @@ public class LibBoardModifyService {
 			originalTotal += original + "`";
 			storeTotal += store + "`";
 			fileSizeTotal += fileSize + "`";
-			file = new File(filePath + "\\" + store);
+			file = new File(filePath +"/" + store);
 			try {// 파일저장 
 				mf.transferTo(file);
 			}catch(Exception e) {e.printStackTrace();}

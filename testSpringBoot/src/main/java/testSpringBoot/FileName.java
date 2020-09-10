@@ -1,4 +1,4 @@
-package testSpringBoot.domain;
+package testSpringBoot;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
