@@ -19,6 +19,7 @@ import testSpringBoot.FileName;
 import testSpringBoot.command.LibraryBoardCommand;
 import testSpringBoot.controller.FileDownLoad;
 import testSpringBoot.service.libraryBoard.FileDelService;
+import testSpringBoot.service.libraryBoard.LibBoardDeleteService;
 import testSpringBoot.service.libraryBoard.LibBoardModifyService;
 import testSpringBoot.service.libraryBoard.LibraryBoardDetailService;
 import testSpringBoot.service.libraryBoard.LibraryBoardListService;

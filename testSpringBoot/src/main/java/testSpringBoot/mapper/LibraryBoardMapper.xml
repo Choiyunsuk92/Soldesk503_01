@@ -70,5 +70,12 @@
 	</select>
 	<select id="getLibraryCount" resultType="int">
 		select count(*) from LIBRARYBOARD
-	</select>	
+	</select>
+	<delete id="libraryDelete" parameterType="string">
+		delete from libraryboard
+		where board_num = #{boardNum}
+    </delete>
+	
+	
+		
 </mapper>

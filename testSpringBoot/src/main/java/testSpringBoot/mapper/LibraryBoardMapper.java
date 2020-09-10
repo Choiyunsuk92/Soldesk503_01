@@ -15,5 +15,5 @@ public interface LibraryBoardMapper {
     public Integer getLibraryCount() throws Exception;
     public void libraryUpdate(LibraryBoardDTO dto) throws  Exception;
     public void updateReadCount(String boardNum) throws Exception;
-    
+    public void libraryDelete(String  boardNum) throws Exception;
 }
