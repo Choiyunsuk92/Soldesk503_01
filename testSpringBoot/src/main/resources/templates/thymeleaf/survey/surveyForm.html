@@ -7,27 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form method="post">
-<div th:each="q,status: ${questions} ">
-<!--  <c:forEach items="${questions}" var="q" varStatus="status">-->
+<form method="post" action="surveyOk">
+<div th:each="q,status: ${list} "> <!-- 문제 수만큼  반복  -->
 <p>
-	${status.count }번 문제 ) ${q.title } <br />
-	<div th:if="${q.choice }">
-	<!-- <c:if test="${q.choice }"> -->
-		<div th:each="option : ${q.options }">
-		<!-- <c:forEach items="${q.options }" var="option"> -->
-		<input type="radio" th:name="${'responses['+status.index+']'" th:value="${option }" />${option }
-		<!-- </c:forEach>-->
-		</div>
-	<!-- </c:if>  --->
-	</div>
-	<div th:if="${q.choice == null }">
-	<!-- <c:if test="${!q.choice }"> -->
-		<input type="text" th:name="${'responses[' + status.index + ']'">
-	<!-- </c:if> -->
-	</div>
+	[[${status.count }]]번 문제 ) [[${q.question.questionTitle }]] <br />
+	<span th:each = "option, numStat : ${q.options}" > <!-- 문항수 만큼 반복 -->
+		<span th:if="${option.optionName != null}" >
+			<input type="radio"  th:name="${'responses'+ numStat.count}" />
+			[[${option.optionName}]]
+		</span>
+		<span th:if="${option.optionName == null}" >
+			<input type="text" th:name="${'responses'+ numStat.count}" />
+		</span>
+	</span>
 </p>	
-<!-- </c:forEach> -->
 </div>
 <p>
 <label>응답자 위치:<br>
