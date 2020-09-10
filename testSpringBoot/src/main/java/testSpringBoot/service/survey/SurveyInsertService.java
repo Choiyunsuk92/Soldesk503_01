@@ -26,13 +26,15 @@ public class SurveyInsertService {
 		surveyMapper.questionInsert(qdto);
 		//question 저장되고 나서 questionNum를 받아오기 위해 쿼리문 실행 
 		int questionNum = surveyMapper.questionNum(userId);
+		System.out.println(surveyCommend.getOptions()
+				);
 		String options [] = null;
 		if(surveyCommend.getOptions() != null) {
-				surveyCommend.getOptions().split("`");
+			options = surveyCommend.getOptions().split("`");
 		}
 		int optionsNum = 1; //option 번호생성 
 		// 문항은 1개 이상 
-		if(options != null) {
+		if(options != null && !options.equals("")) {
 			// n개만큼 문항이 저장이 되도록 반복구문 사용 
 			for(String optionName : options) {
 				OptionsDTO odto = new OptionsDTO();
@@ -40,6 +42,7 @@ public class SurveyInsertService {
 				odto.setOptionName(optionName);
 				odto.setOptionNum(optionsNum++); // option번호를 option 만큼 1씩증
 				odto.setUserId(userId);
+				System.out.print(optionName);
 				surveyMapper.optionInsert(odto);
 			}
 		}

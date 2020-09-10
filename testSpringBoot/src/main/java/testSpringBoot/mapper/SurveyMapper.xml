@@ -17,9 +17,14 @@
 	where user_id = #{userId}
 </select>
 <insert id = "optionInsert" parameterType="testSpringBoot.domain.OptionsDTO">
-	insert into OPTIONS (user_id,QUESTION_NUM,OPTIONS_NUM , OPTIONS_NAME)
+	insert into OPTIONS (user_id,QUESTION_NUM,OPTION_NUM , OPTION_NAME)
 	values(#{userId}, #{questionNum}, #{optionNum}, #{optionName} )  
 </insert>
+
+<select id = "questionCount" resultType="int">
+	select count(QUESTION_NUM) from question
+	where user_id = '1111'
+</select>
 </mapper>
 
 
