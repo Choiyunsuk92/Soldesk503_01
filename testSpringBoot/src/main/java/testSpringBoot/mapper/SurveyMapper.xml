@@ -25,6 +25,22 @@
 	select count(QUESTION_NUM) from question
 	where user_id = '1111'
 </select>
+<resultMap id = "questionOptionsMap" type= "testSpringBoot.domain.QuestionOptionDTO">
+	<association property="question" javaType="testSpringBoot.domain.QuestionDTO">
+		<id column=  "user_id" jdbcType="VARCHAR" property = "userId" />
+		<id column=  "QUESTION_NUM" jdbcType="BIGINT" property = "questionNum" />
+		<result column=  "question_title" jdbcType="VARCHAR" property = "questionTitle" />
+	</association>
+	<collection property="options" ofType="testSpringBoot.domain.OptionsDTO" >
+		<id column=  "OPTION_NUM" jdbcType="BIGINT" property = "optionNum" />
+		<result column=  "OPTION_NAME" jdbcType="VARCHAR" property = "optionName" />
+	</collection>
+</resultMap>
+<select id = "surveySelectAll" resultMap = "questionOptionsMap">
+	select q.user_id, q.QUESTION_NUM, question_title, OPTION_NUM, OPTION_NAME
+	from  question q, options o
+	where q.QUESTION_NUM = o.QUESTION_NUM(+) and q.user_id = '1111'
+</select>
 </mapper>
 
 
