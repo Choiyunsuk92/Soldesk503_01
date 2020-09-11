@@ -5,8 +5,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import testSpringBoot.command.AnsweredData;
 import testSpringBoot.command.SurveyCommend;
 import testSpringBoot.service.survey.SurveyInsertService;
 import testSpringBoot.service.survey.SurveyService;
@@ -34,5 +36,10 @@ public class SurveyController {
 		surveyService.execute(model);
 		return "thymeleaf/survey/surveyForm";
 	}
-	
+	@RequestMapping("surveyOk")
+	public String submit(@ModelAttribute("ansData") 
+							AnsweredData answeredData) {
+		// model.addAttribute("ansData", answeredData);
+		return "thymeleaf/survey/submitted";
+	}
 }

@@ -13,7 +13,8 @@
 	[[${status.count }]]번 문제 ) [[${q.question.questionTitle }]] <br />
 	<span th:each = "option : ${q.options}" > <!-- 문항수 만큼 반복 -->
 		<span th:if="${option.optionName != null}" >
-			<input type="radio"  th:name="${'responses['+ status.index +']'}" />
+			<input type="radio"  th:name="${'responses['+ status.index +']'}" 
+				th:value="${option.optionName}"/>
 			[[${option.optionName}]]
 		</span>
 		<span th:if="${option.optionName == null}" >

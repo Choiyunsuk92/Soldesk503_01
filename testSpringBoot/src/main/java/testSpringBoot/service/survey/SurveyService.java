@@ -23,7 +23,6 @@ public class SurveyService {
 		int questionCount = surveyMapper.questionCount();
 		for(int i = 1; i <= questionCount ; i++) {
 			QuestionOptionDTO dto = surveyMapper.surveySelectAll(i);
-			System.out.println(dto.getQuestion().getQuestionTitle());
 			lists.add(dto); // 질문을 가진 list
 		}
 		model.addAttribute("list", lists);
