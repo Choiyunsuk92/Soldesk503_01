@@ -18,5 +18,10 @@ public class ScheduleController {
 		dateService.execute(dateCommend, model);
 		return "thymeleaf/schedule/schedule";
 	}
+	@RequestMapping("reservation")
+	public String reservation(DateCommend dateCommend, Model model) {
+		dateService.execute(dateCommend, model);
+		return "thymeleaf/schedule/schedule";
+	}
 	
 }

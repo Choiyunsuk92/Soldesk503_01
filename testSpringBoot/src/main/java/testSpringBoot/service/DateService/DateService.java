@@ -25,7 +25,7 @@ public class DateService {
 			cal.set(Integer.parseInt(nYear), Integer.parseInt(nMonth), 1);
 		}
 		nYear = String.valueOf(cal.get(Calendar.YEAR));
-		nMonth = String.valueOf(cal.get(Calendar.MONTH));
+		nMonth = String.valueOf(cal.get(Calendar.MONTH)+1);
 		int dayNum = cal.get(Calendar.DAY_OF_WEEK) ; // 1일에 해당하는 요일 
 		int maxDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH); // 해당달의 마지막 날 
 		System.out.println(nYear);

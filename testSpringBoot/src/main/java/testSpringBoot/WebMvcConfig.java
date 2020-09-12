@@ -16,6 +16,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter{
 				.excludePathPatterns("/login")
 				.excludePathPatterns("/static/**/")
 				.excludePathPatterns("/chatting")
-				.excludePathPatterns("/chat/**");
+				.excludePathPatterns("/chat/**")
+				.excludePathPatterns("/schedule/**");
 	}
 }

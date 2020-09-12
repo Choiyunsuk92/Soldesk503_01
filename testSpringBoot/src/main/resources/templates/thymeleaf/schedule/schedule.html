@@ -8,25 +8,33 @@
 스케줄 
 
 <table border=1>
+<tr><td align="center" colspan = "7">
+		<a th:href="@{/schedule/schedule(nYear=${nYear},nMonth=${nMonth},action=previous)}">이전</a>
+		[[${nYear}]]년 [[${nMonth}]]
+		<a th:href="@{/schedule/schedule(nYear=${nYear},nMonth=${nMonth},action=next)}">이후</a>
+	</td>
+</tr>
 <tr>
 <th>일</th><th> 월 </th> <th> 화 </th><th> 수 </th><th> 목 </th><th> 금 </th><th> 토 </th>
 </tr >
 <tr >
-<th:block th:each = "num : ${#numbers.sequence(1,35)}" >
-
-	
-		<td>
+<th:block th:each = "num : ${#numbers.sequence(1,42)}" >
+		<td th:onclick="'javascript:location.href=\'reservation?nYear='+ ${nYear}+'&nMonth='+${nMonth}+ '&nDay='+${num - dayNum + 1}+'\''">
 			<div th:if="${num lt dayNum}" ></div>
 			<div th:if="${num ge dayNum && num lt dayNum + maxDay}" 
-					th:text="${num - dayNum + 1}"></div>
-			
+					th:text="${num - dayNum + 1}">		
+			</div>
+			<div th:if="${num gt dayNum + maxDay}" ></div>
 		</td>
-		<th:block th:if="${num % 7 == 0}">
-		</tr><tr>
-		</th:block>
+		<th:block th:if="${num % 7 == 0}" th:utext="'</tr><tr>'" />
 </th:block>
 </tr>
 </table>
 </div>
 </body>
 </html>
+
+
+
+
+
