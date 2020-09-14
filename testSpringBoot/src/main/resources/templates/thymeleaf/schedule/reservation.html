@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+일정 저장 
+<form th:action='@{/schedule/reservationOk }'  method="post" >
+<input type ="hidden" name="nYear" th:value="${dateCommend.nYear}" />
+<input type ="hidden" name="nMonth" th:value="${dateCommend.nMonth}" />
+<input type ="hidden" name="nDay" th:value="${dateCommend.nDay}" />
+년도 : [[${dateCommend.nYear}]] <br/>
+월 : [[${dateCommend.nMonth}]] <br/>
+일 : [[${dateCommend.nDay}]] <br/>
+제목 : <input type ="text" name="scheduleSubject" /><br />
+내용 : <textarea name="scheduleContent" cols="67" rows="15"></textarea><br />
+<input type= "submit" value="일정저장" />
+</form>
+</body>
+</html>

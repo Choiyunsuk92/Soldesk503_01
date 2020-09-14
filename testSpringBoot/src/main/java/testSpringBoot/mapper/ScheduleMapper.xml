@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="testSpringBoot.mapper.ScheduleMapper" >
+	<insert id="scheduleInsert">
+		insert into schedule(n_year, n_month, n_day, schedule_subject,  schedule_content)
+		values(#{nYear},#{nMonth},#{nDay},#{scheduleSubject},#{scheduleContent})
+	</insert>
+	<resultMap type="testSpringBoot.domain.ScheduleDTO" id="scheduleBaseMap">
+		<id column="n_year" jdbcType="VARCHAR" property="nYear"/>
+		<result column="n_month" jdbcType="VARCHAR" property="nMonth"/>
+		<result column="n_day" jdbcType="VARCHAR" property="nDay"/>
+		<result column="schedule_subject" jdbcType="VARCHAR" property="scheduleSubject"/>
+		<result column="schedule_content" jdbcType="VARCHAR" property="scheduleContent"/>
+	</resultMap>
+	<select id="scheduleSelectList" resultMap="scheduleBaseMap">
+		select n_year, n_month, n_day, schedule_subject,  schedule_content
+		from schedule
+		where n_year = #{nYear} and n_month = #{nMonth}
+	</select>
+</mapper>
