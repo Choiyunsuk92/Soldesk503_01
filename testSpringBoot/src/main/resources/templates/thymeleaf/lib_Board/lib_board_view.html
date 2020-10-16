@@ -47,9 +47,9 @@
 		<!-- <a th:href="@{/libraryBoard/fileDown/{file}(file=${file.storeFileName+'`'+file.originalfileName})}" >
 			[[${file.originalfileName }]]</a> -->
 			
-		<!-- 쿼리스트링 방식 -->
-		<a href="/libraryBoard/fileDown?file=${file.storeFileName}"/>
-		<a th:href="@{/libraryBoard/fileDown(file=${file.storeFileName+'`'+file.originalfileName})}" >
+		<!-- 쿼리스트링 방식 
+		<a href="/libraryBoard/fileDown?sfile=${file.storeFileName}&ofile=${file.originalfileName}"/>-->
+		<a th:href="@{/libraryBoard/fileDown(sfile=${file.storeFileName}, ofile = ${file.originalfileName})}" >
 			[[${file.originalfileName }]]</a>
 		&nbsp;&nbsp; / &nbsp;&nbsp;[[${file.fileSize }]]Byte
 		

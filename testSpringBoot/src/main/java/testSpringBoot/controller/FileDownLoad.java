@@ -16,13 +16,13 @@ import org.springframework.util.FileCopyUtils;
 @Component
 @Service
 public class FileDownLoad {
-	public void fileDownLoad(String path, String fileName, HttpServletRequest request, HttpServletResponse response) {
+	public void fileDownLoad(String path, String fileName, String ofileName ,HttpServletRequest request, HttpServletResponse response) {
 		String RealPath = request.getServletContext().getRealPath(path);
-		String originalFileName = fileName.split("`")[1];
+		String originalFileName = ofileName;
 		try {
 			originalFileName = URLEncoder.encode(originalFileName,"UTF-8");
 		}catch(Exception e) {}
-		String storeFileName = fileName.split("`")[0];
+		String storeFileName = fileName;
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment; filename=\"" + originalFileName + "\";");
         response.setHeader("Content-Transfer-Encoding", "binary");

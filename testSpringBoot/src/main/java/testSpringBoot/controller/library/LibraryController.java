@@ -74,10 +74,11 @@ public class LibraryController {
 	@Autowired
 	FileDownLoad fileDownLoad;
 	@RequestMapping("fileDown")
-	public void filDownLoad(@RequestParam(value="file")String fileName,
+	public void filDownLoad(@RequestParam(value="sfile")String sfileName,
+			@RequestParam(value="ofile")String ofileName,
 			HttpServletResponse response, HttpServletRequest request) throws Exception{
 		String path = "/static/lib_Board/upload";
-		fileDownLoad.fileDownLoad(path,fileName,request,response);
+		fileDownLoad.fileDownLoad(path,sfileName,ofileName,request,response);
 	}
 	@RequestMapping("libBoardModify")
 	public String libBoardModify(Model model, HttpSession session,
