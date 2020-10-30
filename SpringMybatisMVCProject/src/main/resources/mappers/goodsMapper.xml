@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goodsMapper">
+<sql id="baseColumn">
+	GOODS_NUM, USER_ID, GOODS_NAME, GOODS_PRICE, GOODS_CONTENT,
+	GOODS_IMAGE, IP_ADDR, GOODS_REGISTER, READ_COUNT
+</sql>
+<delete id="goodsDelete" parameterType="model.GoodsDTO">
+	delete from goods
+	where user_id = #{userId} and goods_num = #{goodsNum}
+</delete>
+<select id="goodsWishList" resultType="model.GoodsDTO">
+	select <include refid="baseColumn" />
+	from goods
+	where goods_num in (
+				select goods_num from wish 
+				where user_id = #{userId})
+</select>
+<insert id="wishAdd" parameterType="model.WishDTO" 
+	useGeneratedKeys="false">
+MERGE into wish w
+USING (select goods_num from goods  
+		where goods_num = #{goodsNum} ) g
+ON (w.GOODS_num = g.GOODS_num 
+	and w.user_id = #{userId} )
+When MATCHED THEN
+	update set w.ck = 1111
+	delete where (w.GOODS_num = #{goodsNum} 
+				  and w.user_id = #{userId})
+When NOT MATCHED THEN
+	insert(w.goods_num, w.user_Id)
+	values(#{goodsNum}, #{userId})
+</insert>
+<select id="wishCount" parameterType="model.WishDTO" 
+			resultType="int">
+	select count(*) from wish
+	where goods_num = #{goodsNum} and user_Id = #{userId}
+</select>
+<update id="goodsCartQtyDown" parameterType="long">
+	update cart
+	set qty = qty - 1,
+	    total_price = (qty - 1) * goods_price
+	where cart_num = #{cartNum}
+</update>
+<delete id="goodsCartRemove" parameterType="hashMap">
+	delete from cart
+	<where>
+		<if test="cartNums != null">
+			cart_num IN   
+			<foreach collection="cartNums" item="cartNum" 
+				index="index" open="(" close=")" separator="," >
+				#{cartNum }
+			</foreach>
+		</if>
+	</where>
+</delete>
+<select id="cartList" parameterType="string" 
+								resultType="model.CartDTO">
+	select cart_num, goods_num, user_id, goods_name, goods_price, 
+		   goods_image, qty, total_price
+	from cart
+	<where>
+		<if test="value != null">
+			user_id = #{userId}
+		</if>
+		<if test="value == null">
+			user_id = null
+		</if>
+	</where> 
+</select>
+<insert id="goodsCartAdd" parameterType="model.CartDTO" 
+	useGeneratedKeys="false">
+	MERGE into cart c1
+	USING (select goods_num from goods  where goods_num = #{goodsNum} ) g1
+	ON (c1.GOODS_num = g1.GOODS_num and c1.user_id = #{userId} )
+	When MATCHED THEN
+		update set c1.qty = c1.qty + 1,
+			   c1.total_price = (c1.qty + 1) *  c1.goods_price	   							   	   
+	When NOT MATCHED THEN
+		insert (c1.cart_num , c1.goods_num, c1.user_id, c1.goods_name,
+		       c1.goods_price, c1.goods_image, c1.qty,c1.total_price)
+		values(NUM_SEQ.nextval, g1.goods_num,#{userId},#{goodsName},
+				#{goodsPrice},#{goodsImage},1,#{goodsPrice})
+</insert>
+<insert id="goodsInsert" parameterType="model.GoodsDTO">
+	insert into goods(<include refid="baseColumn" />)
+	values(#{goodsNum},#{userId},#{goodsName},#{goodsPrice},
+	#{goodsContent},#{goodsImage},#{ipAddr},sysdate,0)
+</insert>
+<resultMap type="model.GoodsDTO" id="baseResultMap">
+	<id column="GOODS_NUM" jdbcType="VARCHAR" property="goodsNum"/>
+	<id column="USER_ID" jdbcType="VARCHAR" property="userId" />
+	<result column="GOODS_NAME" jdbcType="VARCHAR" property="goodsName"/>
+	<result column="GOODS_PRICE" jdbcType="BIGINT" property="goodsPrice"/>
+	<result column="GOODS_CONTENT" jdbcType="VARCHAR" property="goodsContent"/>
+	<result column="GOODS_IMAGE" jdbcType="VARCHAR" property="goodsImage"/>
+	<result column="IP_ADDR" jdbcType="VARCHAR" property="ipAddr"/>
+	<result column="GOODS_REGISTER"  jdbcType="TIMESTAMP" property="goodsRegister"/>
+	<result column="READ_COUNT" jdbcType="BIGINT" property="readCount"/>
+</resultMap>
+<select id="getGoodsList"  resultMap="baseResultMap"> 
+select *
+from(   select rownum rn , <include refid="baseColumn" />
+		from(  select <include refid="baseColumn" />
+				from goods
+				<where>
+					<if test="goodsNum != null">
+						goods_num = #{goodsNum}
+					</if>		
+				</where>
+				order by  GOODS_REGISTER desc))
+<where>
+	<if test="startEndPageDTO != null">
+		rn between #{startEndPageDTO.startPage} 
+		   and #{startEndPageDTO.endPage}
+	</if>
+</where>
+</select>
+<select id="getGoodsCount" resultType="int">
+	select count(*) from goods
+</select>
+</mapper>

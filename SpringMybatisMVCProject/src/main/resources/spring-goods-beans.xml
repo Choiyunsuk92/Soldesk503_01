@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+	"
+>
+	<bean class = "controller.goods.GoodsController" />
+	<bean id="goodsWriteService" 
+		class = "service.goods.GoodsWriteService"/>
+	<bean class = "repository.GoodsRepository" />
+	<bean class = "service.goods.GoodsListService"/>
+	<bean class = "service.goods.GoodsDetailService"/>
+	<bean class = "service.goods.GoodsCartService"/>
+	<bean class= "controller.goods.GoodsCartController" />
+	<bean class= "service.goods.GoodsWishService" />
+	<bean class="service.goods.GoodsDeleteService"/>
+</beans>
